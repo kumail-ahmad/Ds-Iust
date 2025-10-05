@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 struct Node
 {
     int data;
@@ -19,18 +20,18 @@ struct Node *createList(int n)
     struct Node *head = NULL;
     struct Node *temp = NULL;
     struct Node *newNode;
-    int node;
-
+    int Node;
     for (int i = 0; i < n; i++)
     {
-        printf("Enter the data for Node no %d:\n", i + 1);
-        scanf("%d ", &node);
+        printf("Enter the data for Node no %d\n", i + 1);
+        scanf("%d", &Node);
 
-        newNode = createNode(node);
+        newNode = createNode(Node);
+
         if (head == NULL)
         {
             head = newNode;
-            head->next = NULL;
+            newNode->next = NULL;
             temp = head;
         }
         else
@@ -41,27 +42,42 @@ struct Node *createList(int n)
     }
     return head;
 };
+struct Node *insertAtbegining(struct Node *head)
+{
+    int val;
+    printf("Enter the value to be inserted in beginning: \n");
+    scanf("%d", &val);
+
+    struct Node *newNode = createNode(val);
+    newNode->next = head;
+    head = newNode;
+    return head;
+};
 void display(struct Node *head)
 {
+    printf("List : ");
     struct Node *temp = head;
     while (temp != NULL)
     {
         printf("%d -> ", temp->data);
         temp = temp->next;
     }
-    printf("NULL\n");
-}
+    printf("NULL");
+};
+
 int main()
 {
+    int n, valBeg;
     struct Node *head = NULL;
-    int n;
-    printf("Enter number of nodes: ");
+    printf("Enter the no of nodes: ");
     scanf("%d", &n);
 
     head = createList(n);
 
-    printf("\nLinked List Created Successfully.\n");
-    printf("List: ");
+    printf("List Created Succesfully !! \n ");
+
+    head = insertAtbegining(head);
     display(head);
+
     return 0;
 }

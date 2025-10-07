@@ -21,6 +21,11 @@ struct Node *createList(int n)
     struct Node *temp = NULL;
     struct Node *newNode;
     int Node;
+      if (n == 0)
+    {
+        printf("Linked List cannot be  empty!!\n");
+        return ;
+    }
     for (int i = 0; i < n; i++)
     {
         printf("Enter the data for Node no %d\n", i + 1);
@@ -48,6 +53,10 @@ struct Node *insertAtbegining(struct Node *head)
     printf("Enter the value to be inserted in beginning: \n");
     scanf("%d", &val);
 
+      if (head == NULL)
+    {
+        printf("Linked List is empty!!\n");
+    }
     struct Node *newNode = createNode(val);
     newNode->next = head;
     head = newNode;
@@ -58,6 +67,10 @@ struct Node *deletionAtEnd(struct Node *head)
 {
     struct Node *temp = head;
     struct Node *prev = NULL;
+      if (head == NULL)
+    {
+        printf("Linked List is empty!!\n");
+    }
     while (temp->next != NULL)
     {
         prev = temp;
@@ -68,6 +81,39 @@ struct Node *deletionAtEnd(struct Node *head)
     free(temp);
     return head;
 }
+
+struct Node *deletionAtAnyPos(struct Node *head)
+{
+    int pos;
+
+    printf("\nEnter the Nodes position to be deleted :  ");
+    scanf("%d", &pos);
+
+    if (head == NULL)
+    {
+        printf("Linked List is empty!!\n");
+    }
+
+    if (pos == 1)
+    {
+        struct Node *temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+
+    struct Node *temp = head;
+    struct Node *prev = NULL;
+    for (int i = 0; i < pos - 1 && temp != NULL; i++)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = temp->next;
+    free(temp);
+    return head;
+}
+
 void display(struct Node *head)
 {
     printf("List : ");
@@ -93,7 +139,7 @@ int main()
 
     // head = insertAtbegining(head);
     display(head);
-    head = deletionAtEnd(head);
+    head = deletionAtAnyPos(head);
     display(head);
 
     return 0;

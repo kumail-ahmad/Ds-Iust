@@ -78,7 +78,21 @@ struct Node *insertAtEnd(struct Node *head)
         temp = temp->next;
     }
     temp->next = newNode;
-    newNode->prev =temp;
+    newNode->prev = temp;
+    return head;
+}
+struct Node *deleteAtBeginning(struct Node *head)
+{
+    struct Node *temp = head;
+    if (head == NULL)
+    {
+        printf("Linked List is empty!\n");
+        return NULL;
+    }
+    head = head->next;
+    head->prev = NULL;
+    printf("Elemenent deleted with value %d\n", temp->data);
+    free(temp);
     return head;
 }
 
@@ -105,7 +119,7 @@ int main()
 
     printf("List Created Succesfully !! \n ");
 
-    head = insertAtEnd(head);
+    head = deleteAtBeginning(head);
     display(head);
 
     return 0;

@@ -82,37 +82,6 @@ struct Node *deletionAtEnd(struct Node *head)
     return head;
 }
 
-struct Node *deletionAtAnyPos(struct Node *head)
-{
-    int pos;
-
-    printf("\nEnter the Nodes position to be deleted :  ");
-    scanf("%d", &pos);
-
-    if (head == NULL)
-    {
-        printf("Linked List is empty!!\n");
-    }
-
-    if (pos == 1)
-    {
-        struct Node *temp = head;
-        head = head->next;
-        free(temp);
-        return head;
-    }
-
-    struct Node *temp = head;
-    struct Node *prev = NULL;
-    for (int i = 0; i < pos - 1 && temp != NULL; i++)
-    {
-        prev = temp;
-        temp = temp->next;
-    }
-    prev->next = temp->next;
-    free(temp);
-    return head;
-}
 
 void display(struct Node *head)
 {
